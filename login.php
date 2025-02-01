@@ -1,4 +1,10 @@
-<?php include('includes/header.php') ?>
+<?php 
+include('includes/header.php'); 
+
+if(isset($_SESSION['auth'])){
+    redirect('index.php','You are already logged in');
+}
+?>
 
 <div class="py-4 bg-secondary text-center">
     <h4 class="text-white">Login</h4>

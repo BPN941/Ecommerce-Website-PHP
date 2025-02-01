@@ -11,6 +11,13 @@ function validate($inputData){
     return trim($validatedData);
 }
 
+function logoutSession(){
+
+    unset($_SESSION['auth']);
+    unset($_SESSION['loggedInUserRole']);
+    unset($_SESSION['loggedInUser']);
+}
+
 function redirect($url,$status)
 {
     $_SESSION['status']=$status;

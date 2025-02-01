@@ -27,7 +27,7 @@ if(isset($_POST['loginBtn']))
                     }
 
                     $_SESSION['auth']=true;
-                    $_SESSION['loggedInUserRole']=$role['role'];
+                    $_SESSION['loggedInUserRole']=$row['role'];
                     $_SESSION['loggedInUser']= [
                         'name'=>$row['name'],
                         'email'=>$row['email']
@@ -36,13 +36,17 @@ if(isset($_POST['loginBtn']))
                 }
                 else
                 {
+                    if($row['is_ban']==1){
+                        redirect('login.php','Your account has been banned. Please contact admin');
+                    }
+                    
                     $_SESSION['auth']=true;
-                    $_SESSION['loggedInUserRole']=$role['role'];
+                    $_SESSION['loggedInUserRole']=$row['role'];
                     $_SESSION['loggedInUser']= [
                         'name'=>$row['name'],
                         'email'=>$row['email']
                     ];
-                    
+
                     redirect('index.php','Logged In Successfully');
                 }
             }
