@@ -72,4 +72,37 @@ if(isset($_POST['updateUser']))
     }
 }
 
+if(isset($_POST['saveSetting']))
+{
+    $email1=validate($_POST['email1']);
+    $phone1=validate($_POST['phone1']);
+    $address=validate($_POST['address']);
+
+    $settingId=validate($_POST['settingId']);
+
+    if($settingId=='insert')
+    {
+        $query="INSERT INTO settings (email1,phone1,address)
+                VALUES ('$email1','$phone1','$address')";
+        $result=mysqli_query($conn,$query);
+    }
+
+    if(is_numeric($settingId))
+    {
+        $query="UPDATE settings SET 
+                email1='$email1',
+                phone1='$phone1',
+                address='$address'
+                WHERE id='$settingId'
+                ";
+        $result=mysqli_query($conn,$query);
+    }
+
+    if($result){
+        redirect('settings.php','Settings Saved');
+    }else{
+        redirect('settings.php','Something Went Wrong');
+    }
+
+}
 ?>
